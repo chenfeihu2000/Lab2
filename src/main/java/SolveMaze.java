@@ -34,6 +34,34 @@ public class SolveMaze {
          * Feel free to adjust this number if you experiment with other mazes.
          */
         for (int step = 0; step < 1000; step++) {
+            if (maze.isFinished() == false) {
+                if (maze.canMove() == true) {
+                    maze.move();
+                    System.out.println(step + " " + "forward");
+                } else {
+                    maze.turnRight();
+                    System.out.println(step + " " + "right");
+                    if (maze.canMove() == true) {
+                        maze.move();
+                        System.out.println(step + " " + "forward");
+                    } else {
+                        maze.turnLeft();
+                        maze.turnLeft();
+                        System.out.println(step + " " + "left");
+                        if (maze.canMove() == true){
+                            maze.move();
+                            System.out.println(step + " " + "forward");
+                        } else {
+                            maze.turnLeft();
+                            System.out.println(step + " " + "left");
+                            maze.move();
+                            System.out.println(step + " " + " back");
+                        }
+                    }
+                }
+            } else {
+                break;
+            }
             // Implement your maze solving algorithm here
         }
 
